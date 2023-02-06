@@ -8,9 +8,14 @@ import lombok.Data;
 
 @Controller
 public class HelloController {
-    @GetMapping
+    @GetMapping("/hmgi")
     @ResponseBody
     public String hello(){
         return "124";
+    }
+
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/question/list";
     }
 }
