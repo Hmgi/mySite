@@ -2,8 +2,10 @@ package com.mysite.hmgi;
 
 import java.util.Optional;
 
+import com.mysite.hmgi.answer.AnswerService;
 import com.mysite.hmgi.question.Question;
 import com.mysite.hmgi.question.QuestionRepository;
+import com.mysite.hmgi.question.QuestionService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,9 +19,16 @@ class SbbApplicationTests {
 
 	@Autowired
 	private QuestionRepository questionRepository;
+	@Autowired
+	private QuestionService questionService;
 
 	@Test
 	void testJpa() {
+		for (int i = 1; i <= 300; i++) {
+			String subject = String.format("테스트 데이터입니다:[%03d]", i);
+			String content = "내용무";
+			this.questionService.create(subject, content);
+		}
 //		Question q1 = new Question();
 //		q1.setSubject("hmgi 무엇인가요?");
 //		q1.setContent("hmgi 대해서 알고 싶습니다.");
@@ -62,10 +71,11 @@ class SbbApplicationTests {
 //		assertEquals("sbb가 무엇인가요?", q.getSubject());
 
 		//data update
-		Optional<Question> oq = this.questionRepository.findById(1);
-		assertTrue(oq.isPresent());
-		Question q = oq.get();
-		q.setSubject("수정된 제목");
-		this.questionRepository.save(q);
+//		Optional<Question> oq = this.questionRepository.findById(1);
+//		assertTrue(oq.isPresent());
+//		Question q = oq.get();
+//		q.setSubject("수정된 제목");
+//		this.questionRepository.save(q);
+
 	}
 }
